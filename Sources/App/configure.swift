@@ -1,10 +1,10 @@
-import FluentSQLite
+import FluentPostgreSQL
 import Vapor
 
 /// Called before your application initializes.
 public func configure(_ config: inout Config, _ env: inout Environment, _ services: inout Services) throws {
     /// Register providers first
-    try services.register(FluentSQLiteProvider())
+    try services.register(FluentPostgreSQLProvider())
 
     /// Register routes to the router
     let router = EngineRouter.default()
@@ -17,17 +17,31 @@ public func configure(_ config: inout Config, _ env: inout Environment, _ servic
     middlewares.use(ErrorMiddleware.self) // Catches errors and converts to HTTP response
     services.register(middlewares)
 
-    // Configure a SQLite database
-    let sqlite = try SQLiteDatabase(storage: .memory)
-
-    /// Register the configured SQLite database to the database config.
+    let databaseName: String
+    let databasePort: Int
+    let username = "podsdb"
+    let password = "podsdb123"
+    if (env == .testing) {
+        databaseName = "podsdb-test"
+        databasePort = 5433
+    } else {
+        databaseName = Environment.get("DATABASE_DB") ?? "podsdb"
+        databasePort = 5432
+    }
+    
     var databases = DatabasesConfig()
-    databases.add(database: sqlite, as: .sqlite)
+    let databaseConfig = PostgreSQLDatabaseConfig(
+        hostname: "localhost",
+        port: databasePort,
+        username: username,
+        database: databaseName,
+        password: password)
+    
+    let database = PostgreSQLDatabase(config: databaseConfig)
+    databases.add(database: database, as: .psql)
     services.register(databases)
-
-    /// Configure migrations
     var migrations = MigrationConfig()
-    migrations.add(model: Todo.self, database: .sqlite)
+    migrations.add(model: User.self, database: .psql)
+    migrations.add(model: Pod.self, database: .psql)
     services.register(migrations)
-
 }
