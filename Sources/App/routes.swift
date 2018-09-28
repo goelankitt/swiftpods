@@ -7,4 +7,7 @@ public func routes(_ router: Router) throws {
     
     let podsController = PodsController()
     try router.register(collection: podsController)
+    
+    let websiteController = WebsiteController()
+    try router.register(collection: websiteController)
 }
