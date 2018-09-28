@@ -1,8 +1,7 @@
 #set("content") {
-    <h1>Swift pods</h1>
     #if(pods) {
-        <table>
-            <thead>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-light">
                 <tr>
                 <th>Name</th>
                 <th>Url</th>
