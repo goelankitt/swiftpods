@@ -2,9 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Hello World</title>
+  <title>#(title) | SwiftPods</title>
 </head>
 <body>
-<h1>Hello World</h1>
+    <h1>Swift pods</h1>
+    #if(pods) {
+        <table>
+            <thead>
+                <tr>
+                <th>Name</th>
+                <th>Url</th>
+                </tr>
+            </thead>
+            <tbody>
+            #for(pod in pods) {
+                <tr>
+                <td><a href="/pods/#(pod.id)">#(pod.name)</a></td>
+                <td>#(pod.url)</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    } else {
+        <h2>There aren’t any pods yet!</h2>
+    }
 </body>
 </html>
