@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<title>#(title) | Pods</title>
-</head>
-<body>
-<h1>#(pod.name)</h1>
-<h2>#(pod.url)</h2>
-</body>
-</html>
+#set("content") {
+    <h1>#(pod.name)</h1>
+    <h2>#(pod.url)</h2>
+}
+
+#embed("base")

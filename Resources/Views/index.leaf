@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>#(title) | SwiftPods</title>
-</head>
-<body>
+#set("content") {
     <h1>Swift pods</h1>
     #if(pods) {
         <table>
@@ -15,16 +9,17 @@
                 </tr>
             </thead>
             <tbody>
-            #for(pod in pods) {
-                <tr>
-                <td><a href="/pods/#(pod.id)">#(pod.name)</a></td>
-                <td>#(pod.url)</td>
-                </tr>
-            }
+                #for(pod in pods) {
+                    <tr>
+                    <td><a href="/pods/#(pod.id)">#(pod.name)</a></td>
+                    <td>#(pod.url)</td>
+                    </tr>
+                }
             </tbody>
         </table>
     } else {
         <h2>There aren’t any pods yet!</h2>
     }
-</body>
-</html>
+}
+
+#embed("base")
