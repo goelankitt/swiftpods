@@ -6,6 +6,8 @@ struct WebsiteController: RouteCollection {
     func boot(router: Router) throws {
         router.get(use: indexHandler)
         router.get("pods", Pod.parameter, use: podHandler)
+        router.get("add", use: addPodHandler)
+        router.post(Pod.self, at: "add", use: addPodPostHandler)
     }
     
     func indexHandler(_ req: Request) throws -> Future<View> {
@@ -29,6 +31,21 @@ struct WebsiteController: RouteCollection {
                 return try req.view().render("pod", context)
         }
     }
+
+    func addPodHandler(_ req: Request) throws -> Future<View> {
+        let context = AddPodContext(title: "Add Package")
+        return try req.view().render("add", context)
+    }
+    
+    func addPodPostHandler(_ req: Request, pod: Pod) throws -> Future<Response> {
+        return pod.save(on: req).map(to: Response.self) {
+            pod in
+            guard let id = pod.id else {
+                throw Abort(.internalServerError)
+            }
+            return req.redirect(to: "/pods/\(id)")
+        }
+    }
 }
 
 struct IndexContext: Encodable {
@@ -39,4 +56,8 @@ struct IndexContext: Encodable {
 struct PodContext: Encodable {
     let title: String
     let pod: Pod
+}
+
+struct AddPodContext: Encodable {
+    let title: String
 }

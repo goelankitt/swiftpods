@@ -5,12 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/style.css">
 <title>#(title) | Acronyms</title>
 </head>
 <body>
     #// Bootstrap Nav bar
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">SwiftPods</a>
+    <nav class="navbar navbar navbar-expand-lg navbar-light">
+    <div class="container">
+    <a class="navbar-brand" href="/">
+        #// Margin added to image to add space between logo and SwiftPods text
+        <img src="/images/swift_logo.svg" width="30" height="30" class="d-inline-block align-top" alt="" style="display:inline;margin:0px 10px 0px 0px;">
+        SwiftPods
+    </a>
     <button class="navbar-toggler" type="button"
     data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -20,9 +26,11 @@
     <div class="collapse navbar-collapse"
     id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-    <li class="nav-item #if(title == "Homepage"){active}">
-    <a href="/" class="nav-link">Home</a>
-    </li> </ul>
+        <li class="nav-item #if(title == "Add Package"){active}">
+        <a href="/add" class="nav-link">Add Package</a>
+        </li>
+    </ul>
+    </div>
     </div>
     </nav>
     <div class="container mt-3">
