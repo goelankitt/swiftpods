@@ -5,6 +5,7 @@ struct WebsiteController: RouteCollection {
     
     func boot(router: Router) throws {
         router.get(use: indexHandler)
+        router.get("list", use: listHandler)
         router.get("pods", Pod.parameter, use: podHandler)
         router.get("add", use: addPodHandler)
         router.post(Pod.self, at: "add", use: addPodPostHandler)
@@ -14,11 +15,21 @@ struct WebsiteController: RouteCollection {
         return Pod.query(on: req)
             .all()
             .flatMap(to: View.self) { pods in
-                let acronymsData = pods.isEmpty ? nil : pods
-                let context = IndexContext(
-                    title: "Homepage",
-                    pods: acronymsData)
+                let podsData = pods.isEmpty ? nil : pods
+                let context = IndexContext(title: "Homepage", pods: podsData)
                 return try req.view().render("index", context)
+        }
+    }
+    
+    func listHandler(_ req: Request) throws -> Future<View> {
+        return Pod.query(on: req)
+            .all()
+            .flatMap(to: View.self) { pods in
+                let podsData = pods.isEmpty ? nil : pods
+                let context = ListContext(
+                    title: "Listpage",
+                    pods: podsData)
+                return try req.view().render("list", context)
         }
     }
     
@@ -33,7 +44,7 @@ struct WebsiteController: RouteCollection {
     }
 
     func addPodHandler(_ req: Request) throws -> Future<View> {
-        let context = AddPodContext(title: "Add Package")
+        let context = AddPodContext(title: "Addpage")
         return try req.view().render("add", context)
     }
     
@@ -49,6 +60,11 @@ struct WebsiteController: RouteCollection {
 }
 
 struct IndexContext: Encodable {
+    let title: String
+    let pods: [Pod]?
+}
+
+struct ListContext: Encodable {
     let title: String
     let pods: [Pod]?
 }

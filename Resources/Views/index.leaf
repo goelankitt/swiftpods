@@ -1,10 +1,11 @@
 #set("content") {
     <div class='center image'>
     <img class='home_center' src='images/home_center.png' style='max-width: 100%;padding-left:ypx;padding-right:ypx'/>
-    <div style='max-width: 80%;margin: 0 auto;text-align: center'>
-    <h5 class="text-center">Discover libraries, modules and packages created for use with Swift Package Manager.</h5>
+        <div style='max-width: 80%;margin: 0 auto;text-align: center'>
+        <h6 class="text-center">Discover libraries, modules and packages created for use with Swift Package Manager.</h6>
+        </div>
     </div>
-    </div>
+
 }
 
 #embed("base")
