@@ -1,4 +1,5 @@
 #set("content") {
+    <div class="container mt-3">
     <div class='center image' style='margin-bottom: 30px'>
         <img class='home_center' src='images/home_center.png' style='max-width: 100%;padding-left:ypx;padding-right:ypx'/>
         <div style='max-width: 80%;margin: 0 auto;text-align: center'>
@@ -10,9 +11,10 @@
         <div class="input-group">
             <input type="text" class="form-control">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">Search</button>
+                <button class="btn btn-primary" type="button" id="lol">Search</button>
             </span>
         </div>
+    </div>
     </div>
 }
 

@@ -37,7 +37,7 @@ struct WebsiteController: RouteCollection {
         return try req.parameters.next(Pod.self)
             .flatMap(to: View.self) { pod in
                 let context = PodContext(
-                    title: pod.name,
+                    title: "PodDetail",//pod.name,
                     pod: pod)
                 return try req.view().render("pod", context)
         }

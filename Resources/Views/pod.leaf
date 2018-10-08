@@ -1,6 +1,7 @@
 #set("content") {
-    <h1>#(pod.name)</h1>
-    <h2>#(pod.url)</h2>
+    <div id="markdowntest"></div>
+    <script src="/scripts/markdown.js"></script>
+    <script src="/scripts/fetchReadme.js"></script>
 }
 
 #embed("base")
