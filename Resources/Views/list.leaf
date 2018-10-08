@@ -1,26 +1,30 @@
 #set("content") {
-    <div class="container mt-3">
-    #if(pods) {
-        <table class="table table-bordered table-hover">
-        <thead class="thead-light">
-        <tr>
-        <th>Name</th>
-        <th>Url</th>
-        </tr>
-        </thead>
-        <tbody>
-        #for(pod in pods) {
-            <tr>
-            <td><a href="/pods/#(pod.id)">#(pod.name)</a></td>
-            <td>#(pod.url)</td>
-            </tr>
-        }
-        </tbody>
-        </table>
-    } else {
-        <h2>There aren’t any pods yet!</h2>
-    }
+<div class="container-fluid" style="background-color: green">Header</div>
+    <div class="container-fluid" style="background-color: orange;display: flex;flex-direction: column;align-items: center;">
+    <div class="container" style="border:1px solid gray;max-width: 75%; display: flex;justify-content: center;align-items: center;">
+        <input type="text" id="searchinput" class="form-control" placeholder="Search Pods">
     </div>
+    <div class="container" style="border:1px solid gray;max-width: 75%; display: flex;justify-content: center;align-items: center;">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+</div>
+<div class="container-fluid" style="background-color: green">Footer</div>
+
+<div class="container-fluid" style="max-width: 75%;display: flex;flex-direction: column;align-items: center;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Github URL</th>
+            </tr>
+        </thead>
+            <tbody id="results">
+            </tbody>
+    </table>
+</div>
+
+<script src="/scripts/getPods.js"></script>
 }
 
 #embed("base")
